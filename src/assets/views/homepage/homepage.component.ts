@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavbarComponent } from '../../widgets/navbar/navbar.component';
 
 @Component({
@@ -9,5 +9,5 @@ import { NavbarComponent } from '../../widgets/navbar/navbar.component';
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-
+  @Input() ismobile = '';
 }

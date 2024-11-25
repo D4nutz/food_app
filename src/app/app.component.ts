@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+  import { RouterOutlet } from '@angular/router';
 import { HomepageComponent } from '../assets/views/homepage/homepage.component';
 
 @Component({
@@ -11,19 +12,19 @@ import { HomepageComponent } from '../assets/views/homepage/homepage.component';
 })
 export class AppComponent {
   title = 'food_app';
-  isMobile:boolean = false;
+  ismobile:boolean = false;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkDevice();
+    }
+  }
+
+  checkDevice() {
+    const minWidth = 768; // Minimum width for desktop devices
+    this.ismobile = window.innerWidth < minWidth || screen.width < minWidth;
+  }
 }
 
-function isMobile() {
-  const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-  return regex.test(navigator.userAgent);
-}
-
-if (isMobile()) {
-  console.log("Mobile device detected");
-} else {
-  console.log("Desktop device detected");
-}
 
 
