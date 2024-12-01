@@ -1,6 +1,6 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-  import { RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { HomepageComponent } from '../assets/views/homepage/homepage.component';
 
 @Component({

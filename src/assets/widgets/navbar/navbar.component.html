@@ -1,14 +1,13 @@
 <div *ngIf="ismobile === 'true'">
-    <div class="flex flex-row justify-center items-center gap-5">
-        <div class="flex flex-row justify-center items-center p-1">
-            <mat-icon class="hover:scale-125 duration-200 hover:text-blue-500" aria-hidden="false" aria-label="Player Profile Icon" fontIcon="face"></mat-icon>
+    <div class="flex flex-row justify-center items-center gap-5 p-5">
+        <div class="flex flex-row justify-center items-center p-1 bg-blue-500 rounded-full">
+            <mat-icon class="hover:scale-125 duration-200 text-white text-xl" aria-hidden="false" aria-label="Player Profile Icon" fontIcon="face"></mat-icon>
         </div>
         <app-search-bar></app-search-bar>
-        <div class="flex flex-row justify-center items-center">
-            <mat-icon class="hover:scale-125 duration-200 hover:text-blue-500" aria-hidden="false" aria-label="Shopping Cart Icon" fontIcon="shopping_basket"></mat-icon>
+        <div class="flex flex-row justify-center items-center p-1 bg-blue-500 rounded-full">
+            <mat-icon class="hover:scale-125 duration-200 text-white text-xl" aria-hidden="false" aria-label="Shopping Cart Icon" fontIcon="shopping_basket"></mat-icon>
         </div>
     </div>
 </div>
 <div *ngIf="ismobile === 'false'">
-    <app-search-bar></app-search-bar>
 </div>
