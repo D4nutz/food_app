@@ -1,15 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
+const path = require('path');
+
 module.exports = {
   content: [
-    './src/**/*.{html,js}',
-    './src/assets/**/*.{html,js}',
-    './src/assets/views/**/*.{html,js}',
-    './src/assets/widgets/**/*.{html,js}',
+    path.join(__dirname, 'src/**/*.{html,ts}'),
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
-
+};

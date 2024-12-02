@@ -3,5 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+$UIpageBackground: rgb(59, 130, 246, 1);
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { background-color: $UIpageBackground; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
