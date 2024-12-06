@@ -1,9 +1,7 @@
 <div *ngIf="ismobile === 'true'">
-    <div class="flex flex-row justify-center items-center gap-5 p-5">
+    <div class="flex flex-row justify-center items-center gap-5 p-5 relative">
         <div class="flex flex-row justify-center items-center p-1 bg-gray-200 rounded-full"
-             routerLink="user-profile"
-             routerLinkActive="active"
-             ariaCurrentWhenActive="page">
+             (click)="openModal('player_profile')">
             <mat-icon class="hover:scale-125 duration-200 text-black text-xl"
                       aria-hidden="false"
                       aria-label="Player Profile Icon"
@@ -12,6 +10,17 @@
         <app-search-bar></app-search-bar>
         <div class="flex flex-row justify-center items-center p-1 bg-gray-200 rounded-full">
             <mat-icon class="hover:scale-125 duration-200 text-black text-xl" aria-hidden="false" aria-label="Shopping Cart Icon" fontIcon="shopping_basket"></mat-icon>
+        </div>
+        <div *ngIf="isProfileToggled" class="absolute -bottom-96 left-1/2 w-full h-64 -translate-x-1/2 -translate-y-1/2 flex p-4">
+            <div class="absolute -top-0 left-6 w-0 h-0 
+                            border-l-[15px] border-l-transparent
+                            border-b-[20px] border-b-gray-200
+                            border-r-[15px] border-r-transparent">
+            </div>
+            <div class="bg-gray-200 w-full h-full border-2 rounded-xl">
+
+            </div>
+
         </div>
     </div>
 </div>
