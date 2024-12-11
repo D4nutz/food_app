@@ -15,7 +15,6 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
   @Input() ismobile = '';
   
-  isProfileToggled: boolean = false;
 
   constructor() {
 
@@ -24,7 +23,7 @@ export class NavbarComponent {
   public openModal(page: string) {
     switch(page) {
       case 'player_profile':
-        this.isProfileToggled = !this.isProfileToggled;
+        window.postMessage({ type: 'userProfileToggled', data: true }, window.location.origin);
         break;
 
     }
