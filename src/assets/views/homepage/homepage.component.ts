@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { NavbarComponent } from '../../widgets/navbar/navbar.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
@@ -11,8 +11,17 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 })
 export class HomepageComponent {
   @Input() ismobile = '';
+  @Output() isprofiletoggled:boolean = false;
 
   constructor() {
-
+    if (typeof window !== "undefined") {
+      window.addEventListener( "message", ((e) => {
+        switch(e.data.type) {
+          case "userProfileToggled":
+            this.isprofiletoggled = e.data.isProfileToggled;
+            break;
+        }
+      }));
+   }
   }
 }

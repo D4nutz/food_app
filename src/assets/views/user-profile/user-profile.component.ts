@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -10,15 +10,28 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-profile.component.scss'
 })
 
+export class UserProfileComponent implements OnChanges {
+  @Input() isprofiletoggled: boolean = false;
 
-export class UserProfileComponent {
-  isProfileToggled: boolean = false;
+  userData: Array<any> = [
+    {label: 'First Name', content: 'Joe'},
+    {label: 'Last Name', content: 'Doe'},
+    {label: 'Gender', content: 'M'},
+    {label: 'Date Of Birth', content: '12/06/2024'},
+    {label: 'Country', content: 'Romania'},
+    {label: 'Phone', content: '053413212131'},
+    {label: 'Email', content: 'joeDoe@hotmail.com'},
+    {label: 'Orders', content: '69'},
+  ];
 
-  consturctor() {
-    console.log('loaded'
-    )
+  constructor() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isprofiletoggled']) {
+      console.log(this.isprofiletoggled);
+    }
   }
 }
-
 
 
