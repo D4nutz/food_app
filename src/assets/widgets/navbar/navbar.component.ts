@@ -25,7 +25,7 @@ export class NavbarComponent {
   public openModal(page: string) {
     switch(page) {
       case 'player_profile':
-        this.isProfileToggled = !this.isProfileToggled;
+        this.isProfileToggled = true;
         window.postMessage({ type: 'userProfileToggled', isProfileToggled: this.isProfileToggled }, window.location.origin);
         break;
 

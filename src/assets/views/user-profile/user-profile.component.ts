@@ -27,6 +27,16 @@ export class UserProfileComponent implements OnChanges {
   constructor() {
   }
 
+  public closeModal(page: string) {
+    switch(page) {
+      case 'player_profile':
+        this.isprofiletoggled = false;
+        window.postMessage({ type: 'userProfileToggled', isProfileToggled: this.isprofiletoggled }, window.location.origin);
+        break;
+
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isprofiletoggled']) {
       console.log(this.isprofiletoggled);
