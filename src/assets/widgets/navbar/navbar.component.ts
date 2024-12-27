@@ -16,6 +16,7 @@ export class NavbarComponent {
   @Input() ismobile = '';
 
   isProfileToggled: boolean = false;
+  isCartToggled: boolean = false;
   
 
   constructor() {
@@ -28,7 +29,10 @@ export class NavbarComponent {
         this.isProfileToggled = true;
         window.postMessage({ type: 'userProfileToggled', isProfileToggled: this.isProfileToggled }, window.location.origin);
         break;
-
+      case 'user_cart':
+        this.isCartToggled = true;
+        window.postMessage({ type: 'userCartToggled', isCartToggled: this.isCartToggled }, window.location.origin);
+        break;
     }
   }
 }

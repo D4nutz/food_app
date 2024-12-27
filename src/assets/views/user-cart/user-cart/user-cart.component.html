@@ -1,0 +1,73 @@
+
+<div *ngIf="iscarttoggled" class="absolute top-1/2 left-1/2 w-full h-full flex -translate-x-1/2 -translate-y-1/2">
+    <span class="absolute w-full h-full bg-opacity-50 bg-black"
+          (click)="closeModal('user_cart')"></span>
+    <div class="modal_container w-full h-3/6 flex p-4 m-auto">
+        <div class="relative bg-gray-200 w-full h-full border-2 rounded-xl">
+            <div class="flex flex-col justify-center items-center w-full h-full p-4">
+                <div class="flex flex-row justify-start items-start w-full p-4 bg-blue-500 rounded-md">
+                    <div class="flex flex-col w-full pl-4 text-gray-200">
+                        <div class="text-left w-full">
+                            <span class="flex justify-start items-end">
+                                <p class="text-xl m-0">Shopping Cart</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="material-icons hover:scale-125 hover:cursor-pointer duration-200 text-gray-200 text-xl"
+                            (click)="closeModal('user_cart')">cancel</i>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 w-full h-full p-4 gap-2 overflow-auto overflow-y-scroll no-scrollbar">
+                    <div *ngFor="let product of userProducts"
+                          class="flex flex-row justify-between items-center w-full py-2 border-b-2 border-blue-500">
+                        <img class="w-1/5"
+                             src="assets/img/shirt.png">
+                        <span>
+                            <p class="text-md text-gray-500 uppercase">{{product.category}}</p>
+                            <p class="text-xs text-blue-500">{{product.name}}</p>
+                        </span>
+                        <div class="relative flex items-center max-w-[8rem]">
+                            <button type="button" 
+                                    class="bg-blue-500 border p-2 rounded-full hover:scale-125 hover:cursor-pointer duration-200">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white"
+                                     aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 18 2">
+                                    <path stroke="currentColor"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M1 1h16"/>
+                                </svg>
+                            </button>
+                            <input type="text"
+                                   data-input-counter
+                                   class="text-blue-500 text-center bg-transparent w-10"
+                                   placeholder="999"
+                                   value="{{product.pieces}}" 
+                                   required />
+                            <button type="button"
+                                    class="bg-blue-500 border p-2 rounded-full hover:scale-125 hover:cursor-pointer duration-200">
+                                <svg class="w-3 h-3 text-gray-900 dark:text-white"
+                                     aria-hidden="true" 
+                                     xmlns="http://www.w3.org/2000/svg" 
+                                     fill="none" 
+                                     viewBox="0 0 18 18">
+                                    <path stroke="currentColor" 
+                                          stroke-linecap="round" 
+                                          stroke-linejoin="round" 
+                                          stroke-width="2" 
+                                          d="M9 1v16M1 9h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p>{{product.currency}}{{product.price}}</p>
+                        <i class="material-icons">delete</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-profile.component.scss'
 })
 
-export class UserProfileComponent implements OnChanges {
+export class UserProfileComponent {
   @Input() isprofiletoggled: boolean = false;
 
   userData: Array<any> = [
@@ -34,12 +34,6 @@ export class UserProfileComponent implements OnChanges {
         window.postMessage({ type: 'userProfileToggled', isProfileToggled: this.isprofiletoggled }, window.location.origin);
         break;
 
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isprofiletoggled']) {
-      console.log(this.isprofiletoggled);
     }
   }
 }
