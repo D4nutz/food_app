@@ -1,0 +1,15 @@
+<section id="Projects"
+         class="grid grid-cols-1 w-full h-full p-4 gap-10 justify-start items-start
+                xs:grid-cols-2
+                sm:grid-cols-3
+                md:grid-cols-4
+                lg:grid-cols-5">
+    <div *ngFor="let product of categoryProducts">
+        <app-product-box [productname]="product.name"
+                         [productcategory]="product.category"
+                         [productcurrency]="product.currency"
+                         [productoldPrice]="product.oldPrice"
+                         [productprice]="product.price"
+        ></app-product-box>
+    </div>
+</section>

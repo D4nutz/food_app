@@ -7,7 +7,11 @@ module.exports = {
     path.join(__dirname, 'src/**/*.{html,ts}'),
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '360px',
+      },
+    },
   },
   plugins: [],
 };

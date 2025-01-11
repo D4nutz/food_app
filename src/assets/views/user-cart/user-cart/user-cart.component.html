@@ -18,7 +18,7 @@
                             (click)="closeModal('user_cart')">cancel</i>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 w-full h-full p-4 gap-2 overflow-auto overflow-y-scroll no-scrollbar">
+                <div class="grid grid-cols-1 w-full h-full p-4 gap-2 overflow-auto overflow-y-scroll no-scrollbar">
                     <div *ngFor="let product of userProducts"
                           class="flex flex-row justify-between items-center w-full py-2 border-b-2 border-blue-500">
                         <img class="w-1/5"
@@ -64,7 +64,8 @@
                             </button>
                         </div>
                         <p>{{product.currency}}{{product.price}}</p>
-                        <i class="material-icons">delete</i>
+                        <i class="material-icons text-blue-500 cursor-pointer duration-200
+                                 hover:text-red-500">delete</i>
                     </div>
                 </div>
             </div>
