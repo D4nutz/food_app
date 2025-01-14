@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 w-full h-full p-4 gap-2 overflow-auto overflow-y-scroll no-scrollbar">
-                    <div *ngFor="let product of userProducts"
+                    <div *ngFor="let product of userProducts; let i = index"
                           class="flex flex-row justify-between items-center w-full py-2 border-b-2 border-blue-500">
                         <img class="w-1/5"
                              src="assets/img/shirt.png">
@@ -65,7 +65,8 @@
                         </div>
                         <p>{{product.currency}}{{product.price}}</p>
                         <i class="material-icons text-blue-500 cursor-pointer duration-200
-                                 hover:text-red-500">delete</i>
+                                 hover:text-red-500"
+                                 (click)="deleteProduct(i)">delete</i>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,6 @@ export class ProductModalComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['productdetails']) {
-      console.log(this.productdetails);
     }
   }
 

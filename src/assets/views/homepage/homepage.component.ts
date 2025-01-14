@@ -25,6 +25,7 @@ export class HomepageComponent {
   @Output() isproductmodaltoggled:boolean = false;
   @Output() productdetails:object = [];
   @Output() selectedcategory:string = 'shirt';
+  @Output() productscategory:Array<any> = [];
 
   constructor() {
     if (typeof window !== "undefined") {
