@@ -1,10 +1,10 @@
 <div class="bg-white shadow-md rounded-xl duration-500
                 hover:scale-105 hover:shadow-xl">
         <a href="#"
-           class="flex flex-col items-center justify-center"
-           (click)="openModal('product_modal')">
+           class="flex flex-col items-center justify-center">
             <img class="object-cover rounded-t-xl"
-                 src="assets/img/shirt.png">
+                 src="assets/img/shirt.png"
+                 (click)="openModal('product_modal')">
             <div class="px-4 py-3 w-full">
                 <span class="text-gray-400 mr-3 uppercase text-xs">{{productcategory}}</span>
                 <p class="text-lg font-bold text-blue-500 truncate block capitalize">{{productname}}</p>
@@ -13,7 +13,8 @@
                         <p class="text-sm text-gray-500 cursor-auto ml-2 mb-0">{{productcurrency}}{{productoldPrice}}</p>
                     </del>
                     <p class="text-lg font-semibold text-blue-500 cursor-auto my-3">{{productcurrency}}{{productprice}}</p>
-                    <div class="ml-auto bg-blue-500 rounded-full p-2 flex justify-center items-center">
+                    <div class="ml-auto bg-blue-500 rounded-full p-2 flex justify-center items-center"
+                         (click)="addCartProduct()">
                         <i class="material-icons text-white">add_shopping_cart</i>
                     </div>
                 </div>

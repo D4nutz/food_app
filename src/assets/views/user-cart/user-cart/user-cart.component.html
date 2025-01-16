@@ -19,54 +19,54 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 w-full h-full p-4 gap-2 overflow-auto overflow-y-scroll no-scrollbar">
-                    <div *ngFor="let product of userProducts; let i = index"
-                          class="flex flex-row justify-between items-center w-full py-2 border-b-2 border-blue-500">
+                    <div *ngFor="let details of arrayByCategory | keyvalue"
+                            class="flex flex-row justify-between items-center w-full py-2 border-b-2 border-blue-500">
                         <img class="w-1/5"
-                             src="assets/img/shirt.png">
+                                src="assets/img/shirt.png">
                         <span>
-                            <p class="text-md text-gray-500 uppercase">{{product.category}}</p>
-                            <p class="text-xs text-blue-500">{{product.name}}</p>
+                            <p class="text-md text-gray-500 uppercase">{{details.value.category}}</p>
+                            <p class="text-xs text-blue-500">{{details.value.name}}</p>
                         </span>
                         <div class="relative flex items-center max-w-[8rem]">
                             <button type="button" 
                                     class="bg-blue-500 border p-2 rounded-full hover:scale-125 hover:cursor-pointer duration-200">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white"
-                                     aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     fill="none"
-                                     viewBox="0 0 18 2">
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 18 2">
                                     <path stroke="currentColor"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M1 1h16"/>
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M1 1h16"/>
                                 </svg>
                             </button>
                             <input type="text"
-                                   data-input-counter
-                                   class="text-blue-500 text-center bg-transparent w-10"
-                                   placeholder="999"
-                                   value="{{product.pieces}}" 
-                                   required />
+                                    data-input-counter
+                                    class="text-blue-500 text-center bg-transparent w-10"
+                                    placeholder="999"
+                                    value="{{details.value.pieces}}" 
+                                    required />
                             <button type="button"
                                     class="bg-blue-500 border p-2 rounded-full hover:scale-125 hover:cursor-pointer duration-200">
                                 <svg class="w-3 h-3 text-gray-900 dark:text-white"
-                                     aria-hidden="true" 
-                                     xmlns="http://www.w3.org/2000/svg" 
-                                     fill="none" 
-                                     viewBox="0 0 18 18">
+                                        aria-hidden="true" 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        fill="none" 
+                                        viewBox="0 0 18 18">
                                     <path stroke="currentColor" 
-                                          stroke-linecap="round" 
-                                          stroke-linejoin="round" 
-                                          stroke-width="2" 
-                                          d="M9 1v16M1 9h16"/>
+                                            stroke-linecap="round" 
+                                            stroke-linejoin="round" 
+                                            stroke-width="2" 
+                                            d="M9 1v16M1 9h16"/>
                                 </svg>
                             </button>
                         </div>
-                        <p>{{product.currency}}{{product.price}}</p>
+                        <p>{{details.value.currency}}{{details.value.price}}</p>
                         <i class="material-icons text-blue-500 cursor-pointer duration-200
-                                 hover:text-red-500"
-                                 (click)="deleteProduct(i)">delete</i>
+                                    hover:text-red-500"
+                                    >delete</i>
                     </div>
                 </div>
             </div>

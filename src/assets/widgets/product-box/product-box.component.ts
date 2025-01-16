@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { initializeApp } from '../../../../node_modules/firebase/app';
+import { getDatabase, ref, push } from '../../../../node_modules/firebase/database';
 
 @Component({
   selector: 'app-product-box',
@@ -15,11 +17,44 @@ export class ProductBoxComponent {
   @Input() productoldPrice: string = '';
   @Input() productprice: string = '';
 
+  firebaseConfig: Object = {
+    apiKey: "AIzaSyBJOWKjzQIW0ButOwxZam4LzJRiJ2L32u0",
+    authDomain: "dashboard-disertatie.firebaseapp.com",
+    databaseURL: "https://dashboard-disertatie-default-rtdb.europe-west1.firebasedatabase.app/",
+    projectId: "dashboard-disertatie",
+    storageBucket: "dashboard-disertatie.firebasestorage.app",
+    messagingSenderId: "589123331886",
+    appId: "1:589123331886:web:588c47b25a2726a55ffcbf",
+    measurementId: "G-2EYTZYVY5T"
+  };
+  app: any = initializeApp(this.firebaseConfig);
+  db: any = getDatabase(this.app);
+  productRef: any = ref(this.db, 'userProducts/black_shirt');
+
   isProductModalToggled: boolean = false;
   productDetails: object = {
     name: this.productname,
     category: this.productcategory,
   };
+
+  public addCartProduct() {
+    let elementToBePushed = {
+      "name": this.productname,
+      "category": this.productcategory,
+      "pieces": 1,
+      "price": this.productprice,
+      "currency": this.productcurrency
+    }
+
+    push((this.productRef), elementToBePushed).then((res: any) => {
+      console.log('element pushed', res);
+    })
+    .catch((error: any) => {
+      console.error('Error while pushing the element', error);
+    });
+
+    window.postMessage({ type: 'newProductInCart', newProductInCart: true}, window.location.origin);
+  }
 
   public openModal(page: string) {
     switch(page) {

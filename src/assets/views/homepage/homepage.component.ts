@@ -23,6 +23,7 @@ export class HomepageComponent {
   @Output() isprofiletoggled:boolean = false;
   @Output() iscarttoggled:boolean = false;
   @Output() isproductmodaltoggled:boolean = false;
+  @Output() newproductincart:boolean = false;
   @Output() productdetails:object = [];
   @Output() selectedcategory:string = 'shirt';
   @Output() productscategory:Array<any> = [];
@@ -40,6 +41,9 @@ export class HomepageComponent {
           case "productModalToggled":
             this.isproductmodaltoggled = e.data.isProductModalToggled;
             this.productdetails = e.data.productDetails;
+            break;
+          case "newProductInCart":
+            this.newproductincart = e.data.newProductInCart;
             break;
         }
       }));

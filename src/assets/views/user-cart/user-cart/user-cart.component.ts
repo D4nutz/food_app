@@ -2,7 +2,21 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { initializeApp } from '../../../../../node_modules/firebase/app';
-import { getDatabase, ref, onValue, remove, get, set, update, orderByChild, query } from '../../../../../node_modules/firebase/database';
+import { getDatabase, ref, get, set } from '../../../../../node_modules/firebase/database';
+
+interface ProductDetails {
+  name: string;
+  category: string;
+  pieces: number; // Use `number` instead of `string` if summing pieces
+  price: string;
+  currency: string;
+}
+
+interface UserProducts {
+  [parentKey: string]: {
+    [productKey: string]: ProductDetails;
+  };
+}
 
 @Component({
   selector: 'app-user-cart',
@@ -13,8 +27,10 @@ import { getDatabase, ref, onValue, remove, get, set, update, orderByChild, quer
 })
 export class UserCartComponent {
   @Input() iscarttoggled: boolean = false;
-  userProducts:Array<any> = [];
-  firebaseConfig:Object = {
+  @Input() newproductincart: boolean = false;
+  userProducts: UserProducts = {};
+  arrayByCategory: { [key: string]: any } = {};
+  firebaseConfig: Object = {
     apiKey: "AIzaSyBJOWKjzQIW0ButOwxZam4LzJRiJ2L32u0",
     authDomain: "dashboard-disertatie.firebaseapp.com",
     databaseURL: "https://dashboard-disertatie-default-rtdb.europe-west1.firebasedatabase.app/",
@@ -31,40 +47,67 @@ export class UserCartComponent {
 
   constructor() {
     this.fetchUserProducts();
+
+    if (typeof window !== "undefined") {
+      window.addEventListener( "message", ((e) => {
+        switch(e.data.type) {
+          case "newProductInCart":
+            this.newproductincart = e.data.newProductInCart;
+            this.fetchUserProducts();
+            break;
+        }
+      }));
+   }
   }
 
   public fetchUserProducts() {
-    get(this.productRef)
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          this.userProducts = snapshot.val();
-        } else {
-          console.log("No data available");
-          this.userProducts = [];
+    get(this.productRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        this.userProducts = snapshot.val();
+
+        if (this.arrayByCategory) {
+          this.arrayByCategory = {};
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching user products:", error);
-      });
+
+        Object.entries(this.userProducts).forEach(([parentKey, productParent]) => {
+          Object.entries(productParent).forEach(([productKey, product]) => {
+            if (this.arrayByCategory[parentKey]) {
+              // Update pieces by summing up
+              this.arrayByCategory[parentKey].pieces += product.pieces;
+            } else {
+              // Initialize category with the first product
+              this.arrayByCategory[parentKey] = { ...product }; // Use a shallow copy
+            }
+          });
+        });
+        
+      } else {
+        console.log("No data available");
+        this.userProducts = {};
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching user products:", error);
+    });
   }
 
-  public deleteProduct(index: number) {
-    // Remove the product from the local array
-    this.userProducts.splice(index, 1);
+  // public deleteProduct(index: number) {
+  //   // Remove the product from the local array
+  //   this.userProducts.splice(index, 1);
   
-    // Reference the entire `userProducts` node in the database
-    const itemRef = ref(this.db, `userProducts`);
+  //   // Reference the entire `userProducts` node in the database
+  //   const itemRef = ref(this.db, `userProducts`);
   
-    // Replace the array in Firebase with the updated array
-    set(itemRef, this.userProducts)
-      .then(() => {
-        console.log('Product deleted successfully');
-        this.fetchUserProducts(); // Refresh the local list
-      })
-      .catch((error) => {
-        console.error("Error removing product: ", error);
-      });
-  }
+  //   // Replace the array in Firebase with the updated array
+  //   set(itemRef, this.userProducts)
+  //     .then(() => {
+  //       console.log('Product deleted successfully');
+  //       this.fetchUserProducts(); // Refresh the local list
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error removing product: ", error);
+  //     });
+  // }
   
   public closeModal(page: string) {
     switch(page) {
