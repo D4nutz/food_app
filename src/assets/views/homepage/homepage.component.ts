@@ -4,6 +4,7 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserCartComponent } from '../user-cart/user-cart/user-cart.component';
 import { ProductsCategoryComponent } from '../products-category/products-category.component';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
+import { UserLoginComponent } from '../user-login/user-login.component';
 
 @Component({
   selector: 'app-homepage',
@@ -13,19 +14,21 @@ import { ProductModalComponent } from '../product-modal/product-modal.component'
     UserProfileComponent,
     UserCartComponent,
     ProductsCategoryComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    UserLoginComponent
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
   @Input() ismobile = '';
+  @Output() selectedcategory:string = 'shirt';
+  @Output() searchedproduct:string = '';
   @Output() isprofiletoggled:boolean = false;
   @Output() iscarttoggled:boolean = false;
   @Output() isproductmodaltoggled:boolean = false;
   @Output() newproductincart:boolean = false;
   @Output() productdetails:object = [];
-  @Output() selectedcategory:string = 'shirt';
   @Output() productscategory:Array<any> = [];
 
   constructor() {
@@ -44,6 +47,9 @@ export class HomepageComponent {
             break;
           case "newProductInCart":
             this.newproductincart = e.data.newProductInCart;
+            break;
+          case "searchedProduct":
+            this.searchedproduct = e.data.searchedProduct;
             break;
         }
       }));

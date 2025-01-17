@@ -12,6 +12,7 @@ import { getDatabase, ref, push } from '../../../../node_modules/firebase/databa
 })
 export class ProductBoxComponent {
   @Input() productname: string = '';
+  @Input() productimg: string = '';
   @Input() productcategory: string = '';
   @Input() productcurrency: string = '';
   @Input() productoldPrice: string = '';

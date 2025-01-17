@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { initializeApp } from '../../../../../node_modules/firebase/app';
-import { getDatabase, ref, get, set } from '../../../../../node_modules/firebase/database';
+import { getDatabase, ref, get } from '../../../../../node_modules/firebase/database';
 
 interface ProductDetails {
   name: string;
@@ -28,6 +28,7 @@ interface UserProducts {
 export class UserCartComponent {
   @Input() iscarttoggled: boolean = false;
   @Input() newproductincart: boolean = false;
+  
   userProducts: UserProducts = {};
   arrayByCategory: { [key: string]: any } = {};
   firebaseConfig: Object = {
@@ -59,7 +60,7 @@ export class UserCartComponent {
       }));
    }
   }
-
+  
   public fetchUserProducts() {
     get(this.productRef).then((snapshot) => {
       if (snapshot.exists()) {
