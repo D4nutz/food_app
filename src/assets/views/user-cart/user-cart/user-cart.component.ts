@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { initializeApp } from '../../../../../node_modules/firebase/app';
 import { getDatabase, ref, get } from '../../../../../node_modules/firebase/database';
+import mqtt from 'mqtt';
 
 interface ProductDetails {
   name: string;
@@ -46,9 +47,10 @@ export class UserCartComponent {
   db:any = getDatabase(this.app);
   productRef:any = ref(this.db, 'userProducts');
 
+  mqttClient:any;
   constructor() {
     this.fetchUserProducts();
-
+    
     if (typeof window !== "undefined") {
       window.addEventListener( "message", ((e) => {
         switch(e.data.type) {
@@ -61,6 +63,20 @@ export class UserCartComponent {
    }
   }
   
+  public publishMessage() {
+    console.log(mqtt);
+    this.mqttClient = mqtt.connect('ws://broker.emqx.io:8083/mqtt'); // sau alt broker pe care îl folosești
+  
+    this.mqttClient.on('connect', () => {
+      console.log('Conectat la brokerul MQTT!');
+      this.mqttClient.publish('magazinRobotizat/comenzi', `Comanda este ${JSON.stringify(this.arrayByCategory)}`);
+    });
+  
+    this.mqttClient.on('error', (err:any) => {
+      console.error('Eroare MQTT:', err);
+    });
+  }
+
   public fetchUserProducts() {
     get(this.productRef).then((snapshot) => {
       if (snapshot.exists()) {

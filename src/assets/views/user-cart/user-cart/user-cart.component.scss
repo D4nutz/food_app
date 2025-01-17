@@ -10,6 +10,27 @@ p {
     margin: 0;
 }
 
+.buttonAnimation {
+    position: relative;
+    transition: all .5s ease-in-out;
+    .material-icons {
+        transform: translateX(0px);
+        transition: all .5s ease-in-out;
+    }
+    p {
+        opacity: 1;
+        transition: all .5s ease-in-out;
+    }
+    &:hover {
+        .material-icons {
+            transform: translateX(35px);
+        }
+        p {
+            opacity: 0;
+        }
+    }
+}
+
 .modal_container {
     transform: scale(0);
     animation: leaves 1s ease-in-out .5s;

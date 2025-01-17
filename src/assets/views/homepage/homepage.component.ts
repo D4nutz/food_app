@@ -1,4 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../widgets/navbar/navbar.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserCartComponent } from '../user-cart/user-cart/user-cart.component';
@@ -10,6 +11,7 @@ import { UserLoginComponent } from '../user-login/user-login.component';
   selector: 'app-homepage',
   standalone: true,
   imports: [
+    CommonModule,
     NavbarComponent,
     UserProfileComponent,
     UserCartComponent,
@@ -28,6 +30,7 @@ export class HomepageComponent {
   @Output() iscarttoggled:boolean = false;
   @Output() isproductmodaltoggled:boolean = false;
   @Output() newproductincart:boolean = false;
+  @Output() isuserloggedin:boolean = false;
   @Output() productdetails:object = [];
   @Output() productscategory:Array<any> = [];
 
@@ -50,6 +53,9 @@ export class HomepageComponent {
             break;
           case "searchedProduct":
             this.searchedproduct = e.data.searchedProduct;
+            break;
+          case "isUserloggedIn":
+            this.isuserloggedin = e.data.isUserloggedIn;
             break;
         }
       }));
