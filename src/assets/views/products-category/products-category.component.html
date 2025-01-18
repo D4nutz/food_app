@@ -5,7 +5,8 @@
                 md:grid-cols-4
                 lg:grid-cols-5">
     <div *ngFor="let details of porductsToBeDisplayed | keyvalue">
-        <app-product-box [productname]="details.value.name"
+        <app-product-box [productkey]="details.value.key"
+                         [productname]="details.value.name"
                          [productimg]="details.value.img"
                          [productcategory]="details.value.category"
                          [productcurrency]="details.value.currency"

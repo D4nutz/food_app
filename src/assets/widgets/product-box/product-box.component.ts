@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { initializeApp } from '../../../../node_modules/firebase/app';
-import { getDatabase, ref, push } from '../../../../node_modules/firebase/database';
+import { getDatabase, ref, push, child } from '../../../../node_modules/firebase/database';
 
 @Component({
   selector: 'app-product-box',
@@ -17,6 +17,7 @@ export class ProductBoxComponent {
   @Input() productcurrency: string = '';
   @Input() productoldPrice: string = '';
   @Input() productprice: string = '';
+  @Input() productkey: string = '';
 
   firebaseConfig: Object = {
     apiKey: "AIzaSyBJOWKjzQIW0ButOwxZam4LzJRiJ2L32u0",
@@ -30,7 +31,7 @@ export class ProductBoxComponent {
   };
   app: any = initializeApp(this.firebaseConfig);
   db: any = getDatabase(this.app);
-  productRef: any = ref(this.db, 'userProducts/black_shirt');
+  productRef: any = ref(this.db, `userProducts`);
 
   isProductModalToggled: boolean = false;
   productDetails: object = {
@@ -38,16 +39,22 @@ export class ProductBoxComponent {
     category: this.productcategory,
   };
 
+  constructor () {
+  }
+
   public addCartProduct() {
     let elementToBePushed = {
       "name": this.productname,
       "category": this.productcategory,
       "pieces": 1,
+      "img": this.productimg,
       "price": this.productprice,
       "currency": this.productcurrency
     }
 
-    push((this.productRef), elementToBePushed).then((res: any) => {
+    const childRef = child(this.productRef, this.productkey);
+
+    push(childRef, elementToBePushed).then((res: any) => {
       console.log('element pushed', res);
     })
     .catch((error: any) => {

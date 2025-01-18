@@ -68,21 +68,29 @@ export class ProductsCategoryComponent implements OnChanges {
         Object.entries(this.categoryProducts).forEach(([parentKey, productParent]) => {
           Object.entries(productParent).forEach(([productKey, product]) => {
             if (this.porductsToBeDisplayed[parentKey]) {
-              // Update pieces by summing up
+              // If the category already exists, update pieces by summing them up
               this.porductsToBeDisplayed[parentKey].pieces += product.pieces;
             } else {
               if (searchedValue) {
-                // Convert both name and searchedValue to lowercase for case-insensitive comparison
+                // If a search value is provided, perform a case-insensitive comparison
                 if (product.name.toLowerCase().includes(searchedValue.toLowerCase())) {
-                  this.porductsToBeDisplayed[parentKey] = { ...product }; // Use a shallow copy
+                  // Add the product to porductsToBeDisplayed and attach the key
+                  this.porductsToBeDisplayed[parentKey] = {
+                    ...product, // Shallow copy to ensure no mutations
+                    key: parentKey, // Attach the key
+                  };
                 }
               } else {
-                // Initialize category with the first product if no search value is provided
-                this.porductsToBeDisplayed[parentKey] = { ...product }; // Use a shallow copy
+                // If no search value is provided, add the product as the first entry for the category
+                this.porductsToBeDisplayed[parentKey] = {
+                  ...product, // Shallow copy
+                  key: parentKey, // Attach the key
+                };
               }
             }
           });
         });
+        
         
       } else {
         console.log("No data available");

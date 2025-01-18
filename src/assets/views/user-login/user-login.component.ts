@@ -37,6 +37,16 @@ export class UserLoginComponent {
 
   constructor() {
     this.fetchUserProducts();
+  
+    if (typeof localStorage !== 'undefined') {
+      let loginStatus = localStorage.getItem('alreadyLogginIn');
+      if (loginStatus === 'true') {
+        this.isUserloggedIn = true;
+        window.postMessage({ type: 'isUserloggedIn', isUserloggedIn: this.isUserloggedIn }, window.location.origin);
+      }
+    } else {
+      console.warn('localStorage is not available in this environment.');
+    }
   }
 
   public fetchUserProducts(searchedValue ? : string) {
@@ -59,6 +69,7 @@ export class UserLoginComponent {
     Object.values(this.usersData).forEach((acc) => {
       if (this.emailFilled === acc.username && this.passwordFilled === acc.password) {
         this.isUserloggedIn = true;
+        localStorage.setItem("alreadyLogginIn", 'true');
         window.postMessage({ type: 'isUserloggedIn', isUserloggedIn: this.isUserloggedIn}, window.location.origin);
       }
     })
